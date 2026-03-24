@@ -1,33 +1,78 @@
-HELP.md
+######################################
+# Maven
+######################################
 target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+!.mvn/wrapper/maven-wrapper.jar
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
+######################################
+# IntelliJ IDEA
+######################################
+.idea/
 *.iml
+*.iws
 *.ipr
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
+######################################
+# VS Code
+######################################
 .vscode/
+
+######################################
+# MacOS
+######################################
+.DS_Store
+
+######################################
+# Windows
+######################################
+Thumbs.db
+ehthumbs.db
+
+######################################
+# Logs
+######################################
+*.log
+logs/
+
+######################################
+# Spring Boot
+######################################
+*.pid
+*.seed
+*.pid.lock
+
+######################################
+# Build files
+######################################
+build/
+out/
+
+######################################
+# Environment files
+######################################
+.env
+.env.local
+.env.*.local
+
+######################################
+# Application secrets
+######################################
+application-prod.yml
+application-prod.properties
+application-local.yml
+
+######################################
+# Test output
+######################################
+test-output/
+
+######################################
+# Temporary files
+######################################
+*.tmp
+*.temp
+
+######################################
+# Coverage reports
+######################################
+coverage/
