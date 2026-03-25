@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a1f5ebc0-9a65-4708-8e3b-9975378397c5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/FinTech/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinTech/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinTech/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinTech/HELP.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinTech/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinTech/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinTech/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinTech/src/main/java/com/company/fintech/FinTechApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinTech/src/main/java/com/company/fintech/common/exception/BusinessException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinTech/src/main/java/com/company/fintech/config/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinTech/src/main/java/com/company/fintech/merchant/entity/Merchant.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinTech/src/main/java/com/company/fintech/merchant/entity/MerchantApiCredential.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinTech/src/main/java/com/company/fintech/merchant/repository/MerchantApiCredentialRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinTech/src/main/java/com/company/fintech/merchant/service/MerchantAuthService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinTech/src/main/java/com/company/fintech/security/filter/ApiKeyAuthFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinTech/src/main/java/com/company/fintech/security/principal/AuthenticatedMerchant.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinTech/src/main/java/com/company/fintech/tenant/entity/Client.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinTech/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinTech/src/test/java/com/company/fintech/FinTechApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="3BNM4j46e9BTuHTbbCEsmLWaGKw" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="FinTechApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="FinTech" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.company.fintech.FinTechApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.32098.37" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.32098.37" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a1f5ebc0-9a65-4708-8e3b-9975378397c5" name="Changes" comment="" />
+      <created>1774324890054</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1774324890054</updated>
+      <workItem from="1774324893428" duration="10684000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
