@@ -1,3 +1,30 @@
 spring:
+  config:
+    import: optional:file:.env[.properties]
   application:
     name: payment-service
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    database-platform: ${SPRING_JPA_DATABASE_PLATFORM:org.hibernate.dialect.H2Dialect}
+  h2:
+    console:
+      enabled: true
+
+server:
+  port: ${SERVER_PORT:8081}
+
+payment:
+  gateway:
+    api-key: ${PAYMENT_GATEWAY_API_KEY:}
+
+webhook:
+  secret-key: ${WEBHOOK_SECRET_KEY:}
