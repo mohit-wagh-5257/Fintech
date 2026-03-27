@@ -9,15 +9,18 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fintech.payment_service.dto.request.CreatePaymentRequest;
 import com.fintech.payment_service.dto.response.PaymentResponse;
 import com.fintech.payment_service.entity.IdempotencyKey;
+import com.fintech.payment_service.entity.OutboxEvent;
 import com.fintech.payment_service.entity.Payment;
 import com.fintech.payment_service.entity.PaymentAttempt;
 import com.fintech.payment_service.entity.PaymentStatusHistory;
 import com.fintech.payment_service.enums.PaymentAttemptStatus;
 import com.fintech.payment_service.enums.PaymentStatus;
 import com.fintech.payment_service.repository.IdempotencyRepository;
+import com.fintech.payment_service.repository.OutboxEventRepository;
 import com.fintech.payment_service.repository.PaymentAttemptRepository;
 import com.fintech.payment_service.repository.PaymentRepository;
 import com.fintech.payment_service.repository.PaymentStatusHistoryRepository;
@@ -29,18 +32,24 @@ public class PaymentService {
     private final PaymentStatusHistoryRepository historyRepository;
     private final PaymentAttemptRepository attemptRepository;
     private final IdempotencyRepository idempotencyRepository;
+    private final OutboxEventRepository outboxRepository;
     private final PaymentEventProducer paymentEventProducer;
+    private final ObjectMapper objectMapper;
 
     public PaymentService(PaymentRepository paymentRepository,
                           PaymentStatusHistoryRepository historyRepository,
                           PaymentAttemptRepository attemptRepository,
                           IdempotencyRepository idempotencyRepository,
-                          PaymentEventProducer paymentEventProducer) {
+                          OutboxEventRepository outboxRepository,
+                          PaymentEventProducer paymentEventProducer,
+                          ObjectMapper objectMapper) {
         this.paymentRepository = paymentRepository;
         this.historyRepository = historyRepository;
         this.attemptRepository = attemptRepository;
         this.idempotencyRepository = idempotencyRepository;
+        this.outboxRepository = outboxRepository;
         this.paymentEventProducer = paymentEventProducer;
+        this.objectMapper = objectMapper;
     }
 
     @Transactional
@@ -138,6 +147,23 @@ public class PaymentService {
                 .build();
     }
 
+    private void saveOutboxEvent(Payment payment, String eventType) {
+        try {
+            OutboxEvent event = new OutboxEvent();
+            event.setAggregateType("PAYMENT");
+            event.setAggregateId(payment.getId());
+            event.setEventType(eventType);
+            event.setPayload(objectMapper.writeValueAsString(payment));
+            event.setPublished(false);
+            event.setCreatedAt(LocalDateTime.now());
+
+            outboxRepository.save(event);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to save outbox event: " + e.getMessage(), e);
+        }
+    }
+
+    @Transactional
     public PaymentResponse processPayment(UUID paymentId) {
 
         Payment payment = paymentRepository.findById(paymentId)
@@ -158,7 +184,7 @@ public class PaymentService {
         attempt.setStartedAt(LocalDateTime.now());
 
         attemptRepository.save(attempt);
-        paymentEventProducer.sendPaymentInitiated(payment);
+        saveOutboxEvent(payment, "PAYMENT_INITIATED");
 
         return mapToResponse(payment);
     }
@@ -178,7 +204,7 @@ public class PaymentService {
         saveStatusHistory(payment.getId(), oldStatus, newStatus, source);
 
         if (newStatus == PaymentStatus.CAPTURED || newStatus == PaymentStatus.FAILED) {
-            paymentEventProducer.sendPaymentUpdated(updated);
+            saveOutboxEvent(updated, "PAYMENT_UPDATED");
         }
     }
 

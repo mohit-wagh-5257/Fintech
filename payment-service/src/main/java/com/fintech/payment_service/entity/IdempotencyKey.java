@@ -16,6 +16,8 @@ public class IdempotencyKey {
     private UUID id;
 
     private UUID merchantId;
+    
+    @Column(unique = true)
     private String idempotencyKey;
 
     private String requestHash;

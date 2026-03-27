@@ -23,6 +23,12 @@ spring:
     bootstrap-servers: localhost:9092
     listener:
       ack-mode: manual
+      type: batch
+      retry:
+        attempts: 3
+        backoff:
+          interval: 2000
+          multiplier: 2
     consumer:
       group-id: fintech-group
       auto-offset-reset: earliest
