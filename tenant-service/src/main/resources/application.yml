@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: tenant-service
+
+  # ── JPA / Hibernate ──
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  # ── DataSource ──
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tenant_db
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+
+# ── Server ──
+server:
+  port: 8084
+
+# ── Actuator ──
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always

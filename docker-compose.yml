@@ -1,3 +1,74 @@
+version: '3.8'
+
+services:
+
+  # ========================
+  # Microservices
+  # ========================
+
+  tenant-service:
+    build:
+      context: ./tenant-service
+      dockerfile: dockerfile
+    container_name: fintech-tenant-service
+    ports:
+      - "8084:8084"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/tenant_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: root # Change to your pgAdmin password
+    networks:
+      - fintech-network
+
+  merchant-service:
+    build:
+      context: ./merchant-service
+      dockerfile: dockerfile
+    container_name: fintech-merchant-service
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/merchant_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: root # Change to your pgAdmin password
+    networks:
+      - fintech-network
+
+  order-service:
+    build:
+      context: ./order-service
+      dockerfile: dockerfile
+    container_name: fintech-order-service
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/order_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: root # Change to your pgAdmin password
+    networks:
+      - fintech-network
+
+  checkout-service:
+    build:
+      context: ./checkout-service
+      dockerfile: dockerfile
+    container_name: fintech-checkout-service
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/checkout_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: root # Change to your pgAdmin password
+    networks:
+      - fintech-network
+
+# ========================
+# Networks
+# ========================
+
+networks:
+  fintech-network:
+    driver: bridge
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.0
