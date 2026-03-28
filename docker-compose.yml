@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
 
+
   # ========================
   # Microservices
   # ========================
@@ -26,7 +27,7 @@ services:
       dockerfile: dockerfile
     container_name: fintech-merchant-service
     ports:
-      - "8081:8081"
+      - "8085:8081"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/merchant_db
       SPRING_DATASOURCE_USERNAME: postgres
@@ -40,7 +41,7 @@ services:
       dockerfile: dockerfile
     container_name: fintech-order-service
     ports:
-      - "8082:8082"
+      - "8086:8082"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/order_db
       SPRING_DATASOURCE_USERNAME: postgres
@@ -54,7 +55,7 @@ services:
       dockerfile: dockerfile
     container_name: fintech-checkout-service
     ports:
-      - "8083:8083"
+      - "8087:8083"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/checkout_db
       SPRING_DATASOURCE_USERNAME: postgres
@@ -62,14 +63,7 @@ services:
     networks:
       - fintech-network
 
-# ========================
-# Networks
-# ========================
 
-networks:
-  fintech-network:
-    driver: bridge
-services:
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.0
     container_name: zookeeper
@@ -138,3 +132,11 @@ services:
       SPRING_DATASOURCE_PASSWORD: ${WEBHOOK_DB_PASSWORD:-root}
       SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+
+# ========================
+# Networks
+# ========================
+
+networks:
+  fintech-network:
+    driver: bridge
