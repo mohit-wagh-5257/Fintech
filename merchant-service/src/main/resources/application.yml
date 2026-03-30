@@ -32,3 +32,6 @@ management:
   endpoint:
     health:
       show-details: always
+external:
+  tenant-service:
+    base-url: http://localhost:8084

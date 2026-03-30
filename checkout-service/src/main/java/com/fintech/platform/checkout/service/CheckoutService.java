@@ -10,4 +10,5 @@ public interface CheckoutService {
     CheckoutSessionResponse createCheckoutSession(CreateCheckoutSessionRequest request);
     CheckoutSessionResponse getCheckoutSessionById(UUID id);
     List<CheckoutSessionResponse> getAllCheckoutSessions();
+    CheckoutSessionResponse expireCheckoutSession(UUID id);
 }

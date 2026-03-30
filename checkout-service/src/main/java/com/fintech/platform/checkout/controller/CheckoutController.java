@@ -31,4 +31,9 @@ public class CheckoutController {
     public List<CheckoutSessionResponse> getAllCheckoutSessions() {
         return checkoutService.getAllCheckoutSessions();
     }
+
+    @PutMapping("/{id}/expire")
+    public CheckoutSessionResponse expireCheckoutSession(@PathVariable UUID id) {
+        return checkoutService.expireCheckoutSession(id);
+    }
 }

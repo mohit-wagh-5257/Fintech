@@ -2,6 +2,7 @@ package com.fintech.platform.order.controller;
 
 import com.fintech.platform.order.dto.CreateOrderRequest;
 import com.fintech.platform.order.dto.OrderResponse;
+import com.fintech.platform.order.dto.UpdateOrderRequest;
 import com.fintech.platform.order.service.OrderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -30,5 +31,21 @@ public class OrderController {
     @GetMapping
     public List<OrderResponse> getAllOrders() {
         return orderService.getAllOrders();
+    }
+
+    @PutMapping("/{id}")
+    public OrderResponse updateOrder(@PathVariable UUID id,
+                                     @RequestBody UpdateOrderRequest request) {
+        return orderService.updateOrder(id, request);
+    }
+
+    @PutMapping("/{id}/cancel")
+    public OrderResponse cancelOrder(@PathVariable UUID id) {
+        return orderService.cancelOrder(id);
+    }
+
+    @PutMapping("/{id}/expire")
+    public OrderResponse expireOrder(@PathVariable UUID id) {
+        return orderService.expireOrder(id);
     }
 }
