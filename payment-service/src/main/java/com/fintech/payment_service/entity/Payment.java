@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.ColumnTransformer;
 
 @Entity
 @Table(name = "payments")
@@ -44,6 +45,7 @@ public class Payment {
     private UUID customerId;
 
     @Column(columnDefinition = "jsonb")
+    @ColumnTransformer(write = "?::jsonb")
     private String metadataJson;
 
     private LocalDateTime createdAt;
