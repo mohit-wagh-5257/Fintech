@@ -13,7 +13,7 @@ services:
       dockerfile: dockerfile
     container_name: fintech-tenant-service
     ports:
-      - "8084:8084"
+      - "8081:8081"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/tenant_db
       SPRING_DATASOURCE_USERNAME: postgres
@@ -27,8 +27,9 @@ services:
       dockerfile: dockerfile
     container_name: fintech-merchant-service
     ports:
-      - "8085:8081"
+      - "8082:8082"
     environment:
+      EXTERNAL_TENANT_SERVICE_BASE_URL: http://tenant-service:8081
       SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/merchant_db
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: root # Change to your pgAdmin password
@@ -41,8 +42,9 @@ services:
       dockerfile: dockerfile
     container_name: fintech-order-service
     ports:
-      - "8086:8082"
+      - "8083:8083"
     environment:
+      EXTERNAL_MERCHANT_SERVICE_BASE_URL: http://merchant-service:8082
       SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/order_db
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: root # Change to your pgAdmin password
@@ -55,8 +57,9 @@ services:
       dockerfile: dockerfile
     container_name: fintech-checkout-service
     ports:
-      - "8087:8083"
+      - "8085:8085"
     environment:
+      EXTERNAL_ORDER_SERVICE_BASE_URL: http://order-service:8083
       SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/checkout_db
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: root # Change to your pgAdmin password
@@ -96,13 +99,13 @@ services:
     depends_on:
       - kafka
     ports:
-      - "8081:8081"
+      - "8084:8084"
     environment:
-      SERVER_PORT: 8081
-      SPRING_DATASOURCE_URL: ${PAYMENT_DB_URL:-jdbc:postgresql://host.docker.internal:5432/payment_db}
-      SPRING_DATASOURCE_DRIVER_CLASS_NAME: ${DB_DRIVER:-org.postgresql.Driver}
-      SPRING_DATASOURCE_USERNAME: ${PAYMENT_DB_USERNAME:-postgres}
-      SPRING_DATASOURCE_PASSWORD: ${PAYMENT_DB_PASSWORD:-root}
+      SERVER_PORT: 8084
+      SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/payment_db
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: root
       SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
 
@@ -112,9 +115,9 @@ services:
     depends_on:
       - kafka
     ports:
-      - "8082:8082"
+      - "8086:8086"
     environment:
-      SERVER_PORT: 8082
+      SERVER_PORT: 8086
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
 
   webhook-service:
@@ -123,13 +126,13 @@ services:
     depends_on:
       - kafka
     ports:
-      - "8083:8083"
+      - "8087:8087"
     environment:
-      SERVER_PORT: 8083
-      SPRING_DATASOURCE_URL: ${WEBHOOK_DB_URL:-jdbc:postgresql://host.docker.internal:5432/webhook_db}
-      SPRING_DATASOURCE_DRIVER_CLASS_NAME: ${DB_DRIVER:-org.postgresql.Driver}
-      SPRING_DATASOURCE_USERNAME: ${WEBHOOK_DB_USERNAME:-postgres}
-      SPRING_DATASOURCE_PASSWORD: ${WEBHOOK_DB_PASSWORD:-root}
+      SERVER_PORT: 8087
+      SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/webhook_db
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: root
       SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
 

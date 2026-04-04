@@ -1,27 +1,25 @@
 spring:
-  config:
-    import: optional:file:.env[.properties]
   application:
     name: webhook-service
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
-    driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/webhook_db
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: root
   jpa:
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
         format_sql: true
-    database-platform: ${SPRING_JPA_DATABASE_PLATFORM}
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
   h2:
     console:
       enabled: true
 
   webhook:
-    verify-token: ${WEBHOOK_VERIFY_TOKEN:}
-    signing-secret: ${WEBHOOK_SIGNING_SECRET:}
+    verify-token: "dummy-verify-token"
+    signing-secret: "dummy-signing-secret"
 
   kafka:
     bootstrap-servers: localhost:9092
@@ -46,4 +44,4 @@ spring:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
 server:
-  port: ${SERVER_PORT:8082}
+  port: 8087

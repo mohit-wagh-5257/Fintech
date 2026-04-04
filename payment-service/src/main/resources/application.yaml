@@ -1,20 +1,18 @@
 spring:
-  config:
-    import: optional:file:.env[.properties]
   application:
     name: payment-service
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
-    driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/payment_db
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: root
   jpa:
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
         format_sql: true
-    database-platform: ${SPRING_JPA_DATABASE_PLATFORM:org.hibernate.dialect.H2Dialect}
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
   h2:
     console:
       enabled: true
@@ -42,11 +40,11 @@ spring:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
 server:
-  port: ${SERVER_PORT:8081}
+  port: 8084
 
 payment:
   gateway:
-    api-key: ${PAYMENT_GATEWAY_API_KEY:}
+    api-key: "dummy-api-key"
 
 webhook:
-  secret-key: ${WEBHOOK_SECRET_KEY:}
+  secret-key: "dummy-secret-key"
