@@ -41,6 +41,8 @@ services:
       context: ./order-service
       dockerfile: dockerfile
     container_name: fintech-order-service
+    depends_on:
+      - kafka
     ports:
       - "8083:8083"
     environment:
@@ -48,6 +50,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/order_db
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: root # Change to your pgAdmin password
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
     networks:
       - fintech-network
 
@@ -56,6 +59,8 @@ services:
       context: ./checkout-service
       dockerfile: dockerfile
     container_name: fintech-checkout-service
+    depends_on:
+      - kafka
     ports:
       - "8085:8085"
     environment:
@@ -63,6 +68,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/checkout_db
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: root # Change to your pgAdmin password
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
     networks:
       - fintech-network
 

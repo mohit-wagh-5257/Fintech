@@ -19,6 +19,10 @@ spring:
     password: root
     driver-class-name: org.postgresql.Driver
 
+  # ── Kafka ──
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
 # ── Server ──
 server:
   port: 8083
